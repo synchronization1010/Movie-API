@@ -68,6 +68,38 @@ app.get('/documentation', (req, res) => {
     res.sendFile ('public/documentation.html', {root: __dirname }); //respond through express.static
 });
 
+app.get('/movies/:title', (req, res) => {
+  res.send('Here is your requested movie.');
+});
+
+app.get('/genres/:genre', (req, res) => {
+  res.send('Here is your requested movie by genre.');
+});
+
+app.get('/directors/:name', (req, res) => {
+  res.send('Here is your requested movie by director.');
+});
+
+app.get('/users/:newUser', (req, res) => {
+  res.send('Tahnk you for registaring to our site!');
+});
+
+app.get('/users/:username', (req, res) => {
+  res.send('Your username has been updated.');
+});
+
+app.get('/favorites/:addMovie', (req, res) => {
+  res.send('Movie has been added to your favorites list.');
+});
+
+app.get('/favorites/:removeMovie', (req, res) => {
+  res.send('Movie has been removed from your favorites list.');
+});
+
+app.get('/users/:removeUser', (req, res) => {
+  res.send('Your account has been removed.');
+});
+
 app.use(express.static('public'));
 
 app.use((err, req, res, next) => {

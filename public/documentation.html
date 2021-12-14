@@ -6,6 +6,93 @@
     </head>
     <body>
         <h1>Movie API Documentation</h1>
-        <p> This API will help you look up your favorite movies!</p>
+        <p>Below is Documentation on how to utilize the Movie API.  Please read carefully.</p>
+        All data is returned as a JSON object. <br>
+        Example: <br>
+            { <br>
+            title: "...", <br>
+            year: "...", <br>
+            genre: "...", <br>
+            director: "...", <br>
+            description: "..." <br>
+            }
+        <br>
+        <br>
+
+        <table border="5">
+            <tr>
+                <th>Request</th>
+                <th>URL</th>
+                <th>HTTP Method</th>
+                <th>Response</th>
+            </tr>
+            <tr>
+                <td>Homepage</td>
+                <td>/</td>
+                <td>N/A</td>
+                <td>Homepage.</td>
+            </tr>
+            <tr>
+                <td>Documentation</td>
+                <td>/documentation</td>
+                <td>N/A</td>
+                <td>Documentation page.</td>
+            </tr>
+            <tr>
+                <td>Return a list of ALL movies to the user</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>JSON object holding data for all movies.</td>
+            </tr>
+            <tr>
+                <td>Return data about a single movie</td>
+                <td>/movies/:title</td>
+                <td>GET</td>
+                <td>JSON object holding data for a specific movie.</td>
+            </tr>
+            <tr>
+                <td>Return data about a genre (description) by name/title.</td>
+                <td>/genres/:genre</td>
+                <td>GET</td>
+                <td>JSON object holding data for movies of that ganre.</td>
+            </tr>
+            <tr>
+                <td>Return data about a director</td>
+                <td>/directors/:name</td>
+                <td>GET</td>
+                <td>JSON object holding data for the director.</td>
+            </tr>
+            <tr>
+                <td>Register a new user</td>
+                <td>/users/:newUser</td>
+                <td>POST</td>
+                <td>JSON object holding data for newly registered user.</td>
+            </tr>
+            <tr>
+                <td>Allow users to update their user info (username)</td>
+                <td>/users/:username</td>
+                <td>PUT</td>
+                <td>Message indicating username was changed.</td>
+            </tr>
+            <tr>
+                <td>Add new movie to list of favorites</td>
+                <td>/favorites/:addMovie</td>
+                <td>POST</td>
+                <td>Message indicating movie was added successfully.</td>
+            </tr>
+            <tr>
+                <td>Remove movie from list of favorites</td>
+                <td>/favorites/:removeMovie</td>
+                <td>DELETE</td>
+                <td>Message indicating movie was removed successfully.</td>
+            </tr>
+            <tr>
+                <td>Deregister existing user</td>
+                <td>/users/:removeUser</td>
+                <td>DELETE</td>
+                <td>Message indicating the user was deleted.</td>
+            </tr>
+        </table>
     </body>
 </html>
+
