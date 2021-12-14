@@ -80,23 +80,23 @@ app.get('/directors/:name', (req, res) => {
   res.send('Here is your requested movie by director.');
 });
 
-app.get('/users/:newUser', (req, res) => {
+app.post('/users', (req, res) => {
   res.send('Tahnk you for registaring to our site!');
 });
 
-app.get('/users/:username', (req, res) => {
+app.put('/users/:username', (req, res) => {
   res.send('Your username has been updated.');
 });
 
-app.get('/favorites/:addMovie', (req, res) => {
+app.post('/favorites/:addMovie', (req, res) => {
   res.send('Movie has been added to your favorites list.');
 });
 
-app.get('/favorites/:removeMovie', (req, res) => {
+app.delete('/favorites/:removeMovie', (req, res) => {
   res.send('Movie has been removed from your favorites list.');
 });
 
-app.get('/users/:removeUser', (req, res) => {
+app.delete('/users/:removeUser', (req, res) => {
   res.send('Your account has been removed.');
 });
 
