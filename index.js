@@ -22,7 +22,7 @@ const Users = Models.User;
 mongoose.connect('process.env.CONNECTION_URI', { useNewUrlParser: true, useUnifiedTopology: true });
 
 //All Movies
-app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/movies', (req, res) => {
   movies.find()
   .then((movies)=>{
       res.status(201).json(movies);
@@ -134,7 +134,7 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
     });
 });
 
-app.put('/users/:Username', (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
       Username: req.body.Username,
