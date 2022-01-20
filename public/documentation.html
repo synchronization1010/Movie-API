@@ -58,37 +58,45 @@
             </tr>
             <tr>
                 <td>Return data about a director</td>
-                <td>/directors/:name</td>
+                <td>/directors/:directorName</td>
                 <td>GET</td>
                 <td>JSON object holding data for the director.</td>
             </tr>
             <tr>
                 <td>Register a new user</td>
-                <td>/users/:newUser</td>
+                <td>/users</td>
                 <td>POST</td>
-                <td>JSON object holding data for newly registered user.</td>
+                <td>JSON object holding data for newly registered user.
+                    (Required Input) <br>
+                    { <br>
+                        "Username" : "username", <br>
+                        "Password" : "password", <br>
+                        "Email" : "valid@email.com", <br>
+                        "Birthday" : "2010-01-01"<br>
+                    }
+                </td>
             </tr>
             <tr>
                 <td>Allow users to update their user info (username)</td>
-                <td>/users/:username</td>
+                <td>/users/:Username</td>
                 <td>PUT</td>
                 <td>Message indicating username was changed.</td>
             </tr>
             <tr>
                 <td>Add new movie to list of favorites</td>
-                <td>/favorites/:addMovie</td>
+                <td>/users/:username/movies/:movieID</td>
                 <td>POST</td>
                 <td>Message indicating movie was added successfully.</td>
             </tr>
             <tr>
                 <td>Remove movie from list of favorites</td>
-                <td>/favorites/:removeMovie</td>
+                <td>/users/:username/movies/:movieID</td>
                 <td>DELETE</td>
                 <td>Message indicating movie was removed successfully.</td>
             </tr>
             <tr>
                 <td>Deregister existing user</td>
-                <td>/users/:removeUser</td>
+                <td>/users/:Username</td>
                 <td>DELETE</td>
                 <td>Message indicating the user was deleted.</td>
             </tr>
