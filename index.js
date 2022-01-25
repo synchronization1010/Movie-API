@@ -42,7 +42,7 @@ app.get('/documentation', (req, res) => {
 });
 
 //Movie by title
-app.get('/movies/:title', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/movies/:title', (req, res) => {
   movies.findOne({Title: req.params.title})
   .then((movie)=>{
       res.json(movie);
