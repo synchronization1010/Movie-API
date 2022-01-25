@@ -22,7 +22,7 @@ const Users = Models.User;
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 //All Movies
-app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/movies', (req, res) => {
   movies.find()
   .then((movies)=>{
       res.status(201).json(movies);
@@ -86,10 +86,10 @@ app.post('/users', [
   ], (req, res) => {
 
   // check for validation
-  let errors = validationResult(req);
-  if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-  }
+  //let errors = validationResult(req);
+  //if (!errors.isEmpty()) {
+  //    return res.status(422).json({ errors: errors.array() });
+  //}
 
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
