@@ -16,7 +16,7 @@ const passport = require('passport');
 require('./passport');
 
 const movies = Models.Movie;
-const Users = Models.User;
+const users = Models.User;
 
 //mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -33,6 +33,7 @@ app.get('/movies', (req, res) => {
   });
 });
 
+//documentation
 app.get('/', (req, res) =>{
     res.send('You like movies from the 90\'s, we like movies from the 90\'s!');
 });
@@ -91,13 +92,13 @@ app.post('/users', [
       return res.status(422).json({ errors: errors.array() });
   }
 
-  let hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOne({ Username: req.body.Username })
+  let hashedPassword = users.hashPassword(req.body.Password);
+  users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
         return res.status(400).send(req.body.Username + 'already exists');
       } else {
-        Users
+        users
           .create({
             Username: req.body.Username,
             Password: hashedPassword,
@@ -119,7 +120,7 @@ app.post('/users', [
 
 // Get all users
 app.get('/users', (req, res) => {
-  Users.find()
+  users.find()
     .then((users) => {
       res.status(201).json(users);
     })
@@ -131,7 +132,7 @@ app.get('/users', (req, res) => {
 
 // Get a user by username
 app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
-  Users.findOne({ Username: req.params.Username })
+  users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
     })
@@ -143,7 +144,7 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
 
 //Change user info
 app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+  users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
       Username: req.body.Username,
       Password: req.body.Password,
@@ -164,7 +165,7 @@ app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req
 
 //Add fav
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, {
+  users.findOneAndUpdate({ Username: req.params.Username }, {
      $push: { FavoriteMovies: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
@@ -180,7 +181,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {sessi
 
 //Delete fav
 app.delete("/users/:Username/FavoriteMovies/:movieID" , passport.authenticate('jwt', {session: false}), (req, res) => {
-  Users.findOneAndUpdate(
+  users.findOneAndUpdate(
     { Username: req.params.username },
     {
       $pull: { FavoriteMovies: req.params.movieID },
@@ -199,7 +200,7 @@ app.delete("/users/:Username/FavoriteMovies/:movieID" , passport.authenticate('j
 
 // Delete a user by username
 app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
-  Users.findOneAndRemove({ Username: req.params.Username })
+  users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
         res.status(400).send(req.params.Username + ' was not found');
